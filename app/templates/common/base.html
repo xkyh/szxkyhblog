@@ -1,0 +1,82 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}星空夜话段子网{% endblock %}
+{% block head %}
+    {{ super() }}
+    {#    加载网站图标#}
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-inverse" style="border-radius: 0;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target=".navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">首页</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+{#                    <li><a href="">所有文章 <span class="sr-only">(current)</span></a></li>#}
+                    <li><a href="{{ url_for('main.about') }}">关于我</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('users.profile') }}">{{ current_user.username }}</a></li>
+                        <li><a href="{{ url_for('users.logout') }}">注销</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('users.login') }}">登录</a></li>
+                        <li><a href="{{ url_for('users.register') }}">注册</a></li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block page_content %}
+
+        {% endblock %}
+    </div>
+
+    {#底部#}
+    <div style="text-align: center;">
+        <hr>
+        <div>
+            <a href="{{ url_for('main.index') }}">首页</a> |
+{#            <a href="">所有文章</a> |#}
+{#            <a href="">知识问答</a> |#}
+            <a href="{{ url_for('main.about') }}">关于我</a>
+        </div>
+        <p>Copyright © 2017 - 2018 星空夜话段子网 版权所有</p>
+        <br>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.locale('zh-CN') }}
+{% endblock %}
+
+
+{% block styles %}
+    {{ super() }}
+
+{% endblock %}

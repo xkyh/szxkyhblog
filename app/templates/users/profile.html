@@ -1,0 +1,10 @@
+{% extends 'users/user_base.html' %}
+{% block bowen_title %}用户信息:{% endblock %}
+{% block bowen_content %}
+    <p style="height: 30px;margin: 10px;font-size: 16px">用户名:{{ current_user.username }}</p>
+    <p style="height: 30px;margin: 10px;font-size: 16px">邮箱:{{ current_user.email }}</p>
+    <p style="height: 30px;margin: 10px;font-size: 16px">头像:</p>
+    <img src="{{ img_url }}" alt="">
+{% endblock %}
+
+

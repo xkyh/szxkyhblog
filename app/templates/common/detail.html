@@ -1,0 +1,31 @@
+{% extends 'common/index.html' %}
+{% block bowen_title %}
+    段子详情
+{% endblock %}
+{% block bowen_content %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object img-thumbnail" src="{{ url_for('static',filename='upload/'+post.user.icon) }}"
+                     alt="...">
+            </a>
+        </div>
+        <div class="media-body">
+            <h3 class="media-heading">{{ post.user.username }}</h3>
+            <p>{{ moment(post.timestamp).fromNow() }}发布 &nbsp;&nbsp;阅读数:({{ post.views }})</p>
+            {{ post.content }}
+        </div>
+    </div>
+    <div id="">
+    {{ wtf.quick_form(form) }}
+    </div>
+    <hr>
+    {% for comment in comments %}
+        <p>评论人:<span style="color: blue">{{ comment.user }}</span>&nbsp;&nbsp;{{ moment(comment.timestamp).fromNow() }}评论</p>
+        <p>{{ comment.content }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}
+{% block paginate %}
+
+{% endblock %}

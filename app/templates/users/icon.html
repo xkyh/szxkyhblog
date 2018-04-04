@@ -1,0 +1,14 @@
+{% extends 'users/user_base.html' %}
+{% block bowen_title %}修改头像:{% endblock %}
+{% block bowen_content %}
+    <div style="width: 400px;margin: 10px">
+        <h4>原头像:</h4>
+        <img src="{{ img_url }}" alt="">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,30 @@
+{% extends 'users/user_base.html' %}
+{% from 'macro.html' import pagination_widget %}
+{% block bowen_title %}我的段子:{% endblock %}
+{% block bowen_content %}
+    <div style="width: 820px;margin: 10px">
+        {% for post in posts %}
+            <hr>
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-thumbnail"
+                             src="{{ url_for('static',filename='upload/'+post.user.icon) }}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h3 class="media-heading">{{ post.user.username }}</h3>
+                    <p>{{ moment(post.timestamp).fromNow() }}发布 &nbsp;&nbsp;阅读数:({{ post.views }})</p>
+                    <p>{{ post.content | truncate(100) }}<a href="{{ url_for('main.detail',postid=post.id) }}">段子详情</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+        <p style="text-align: center">{{ pagination_widget(pagination,'users.myposts') }}</p>
+    </div>
+{% endblock %}
+
+
+
+
+
